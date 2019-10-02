@@ -5,4 +5,5 @@ class Ship:
     self.weapons = weapons
     self.defences = defences
 
-s1 = Ship("boop", 100, 2, "medium")
+s1 = Ship("player", 100, 2, "medium")
+s2 = Ship("boop", 100, 2, "medium")
