@@ -5,3 +5,4 @@ class Weapon:
     self.accuracy = accuracy
 
 w1 = Weapon(10,10,10)
+w2 = Weapon(5,5,5)
