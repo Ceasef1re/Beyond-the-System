@@ -1,8 +1,8 @@
 class Weapon:
-	def __init__(self, damage, cooldown, accuracy):
+	def __init__(self, name, damage, cooldown, accuracy):
 		self.damage = damage
 		self.cooldown = cooldown
 		self.accuracy = accuracy
 
-w1 = Weapon(10,10,10)
-w2 = Weapon(5,5,5)
+w1 = Weapon("lasers",10,10,10)
+w2 = Weapon("missile",5,5,5)
