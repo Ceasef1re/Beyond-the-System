@@ -15,9 +15,18 @@ choice = input("> ")
 
 if choice == "1":
     print("You begun combat!")
-    #while ships.s1.hp > 0 || ships.player.hp > 0:
-        
-        #choice = input("> ")
+    while True:
+        choice = input("1. Fire\n> ")
+        if choice == "1":
+            ships.s1.hp -= ships.playerShip.weapons[0].damage
+            print("You delt " + str(ships.playerShip.weapons[0].damage) + " to enemy ship")
+            print(ships.s1.name + " is on " + str(ships.s1.hp) + " hp!")
+
+            if ships.s1.hp <= 0 or ships.playerShip.hp <= 0:
+                print("\nYou destroyed the enemy ship!")
+                break;
+        else:
+            print("Invalid input")
         
 elif choice == "2":
     print("You fled")
