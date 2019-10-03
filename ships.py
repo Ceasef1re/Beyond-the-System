@@ -1,12 +1,13 @@
 import weapons
 
 class Ship:
-	def __init__(self, name, hp, wepNumber, weapons, defences):
+	def __init__(self, name, hp, shields, weaponNum, weapons, armour):
 		self.name = name
 		self.hp = hp
-		self.wepNumber = wepNumber
+		self.shields = shields
+		self.wepNumber = weaponNum
 		self.weapons = weapons
-		self.defences = defences
+		self.armour = armour
 
-playerShip = Ship("", 100, 2, [weapons.w1, weapons.w2], "medium")
-s1 = Ship("boop", 100, 2, [weapons.w1, weapons.w2], "medium")
+playerShip = Ship("", 100, 100, 2, [weapons.w1, weapons.w2], "medium")
+s1 = Ship("boop", 100, 100, 2, [weapons.w1, weapons.w2], "medium")

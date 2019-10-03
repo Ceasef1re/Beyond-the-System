@@ -36,7 +36,7 @@ if choice == "1":
                         selectedWeapon = playerShip.weapons[loop - 1]
                         break
 
-                    if int(choice) > len(playerShip.weapons):
+                    if (choice) > str(len(playerShip.weapons)):
                         print("Invalid option")
                         break
 
