@@ -45,8 +45,9 @@ if choice == "1":
                     break
     
             print("\nFiring " + selectedWeapon.name + "...")
-            ships.s1.hp -= selectedWeapon.damage
-            print("You delt " + str(selectedWeapon.damage) + " to enemy ship")
+            damage = ships.weapons.DealDamage(selectedWeapon)
+            ships.s1.hp -= damage
+            print("You delt " + str(damage) + " damage to the enemy ship")
             print(ships.s1.name + " is on " + str(ships.s1.hp) + " hp!\n")
 
             if ships.s1.hp <= 0 or playerShip.hp <= 0:

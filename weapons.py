@@ -1,14 +1,15 @@
 import random
 
-def dmg(min, max):
-      while True: return random.randint(min, max)
+def DealDamage(weapon):
+      return random.randint(weapon.minDmg, weapon.maxDmg)
 
 class Weapon:
-	def __init__(self, name, damage, cooldown, accuracy):
+	def __init__(self, name, minDmg, maxDmg, cooldown, accuracy):
 		self.name = name
-		self.damage = damage
+		self.minDmg = minDmg
+		self.maxDmg = maxDmg
 		self.cooldown = cooldown
 		self.accuracy = accuracy
 
-w1 = Weapon("lasers", dmg(1,10), 10, 10)
-w2 = Weapon("missile", dmg(1,15), 5, 5)
+w1 = Weapon("lasers", 1, 10, 10, 10)
+w2 = Weapon("missile", 1, 15, 5, 5)
