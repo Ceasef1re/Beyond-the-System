@@ -1,5 +1,5 @@
 import ships
-import functions
+import combat
 
 cooldownStart = 0
 
