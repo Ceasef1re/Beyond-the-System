@@ -14,11 +14,11 @@ choice = input("> ")
 
 if choice == "1":
     print("You begun combat!\n")
-    functions.combatStart(ships.s1)
+    combat.CombatStart(ships.s1)
              
 elif choice == "2":
     print("You fled")
 else:
-    print("Invalid input")
+    print("Invalid input") #Loop back to choice because it breaks rn
 
 
