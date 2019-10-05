@@ -15,7 +15,7 @@ choice = input("> ")
 if choice == "1":
     print("You begun combat!\n")
     combat.CombatStart(ships.s1)
-             
+    
 elif choice == "2":
     print("You fled")
 else:
