@@ -1,4 +1,5 @@
 import weapons
+import random
 
 class Ship:
 	def __init__(self, name, hp, shields, weaponNum, weapons, armour):

@@ -13,3 +13,5 @@ class Weapon:
 
 w1 = Weapon("lasers", 1, 10, 10, 2)
 w2 = Weapon("missile", 1, 15, 5, 3)
+
+availableWeapons = [w1, w2]
