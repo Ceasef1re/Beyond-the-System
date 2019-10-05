@@ -38,13 +38,16 @@ def DodgeAttack(weapon, enemyShip):
 			chance = random.randint(1, 10)
 			if chance >= 9:
 				dmg = 0
+				enemyShip.hp -= dmg
 				print("Your attack missed")
 			if chance >= 7 and chance < 9:
 				dmg = math.ceil(random.randint(weapon.minDmg, weapon.maxDmg) * 0.25)
 				print(dmg)
+				enemyShip.hp -= dmg
 				print("You dealt " + str(dmg) + " damage")
 			if chance >= 1 and chance < 7:
 				dmg = math.ceil(random.randint(weapon.minDmg, weapon.maxDmg) * 0.5)
+				enemyShip.hp -= dmg
 				print("You dealt " + str(dmg) + " damage")
 				print(enemyShip.name + " is on " + str(enemyShip.hp) + " hp!\n")
 	else:
