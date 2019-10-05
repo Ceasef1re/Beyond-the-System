@@ -29,7 +29,7 @@ def Combat(enemyShip):
 						selectedWeapon = ships.playerShip.weapons[loop - 1]
 						break
 
-					if (choice) > str(len(ships.playerShip.weapons)):
+					if int(choice) > len(ships.playerShip.weapons):
 						print("Invalid option")
 						break
 
