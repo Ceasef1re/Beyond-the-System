@@ -1,7 +1,12 @@
 import ships
 import weapons
+import ai
 
 enemy = "placeholder"
+
+def Attack(weapon, enemyShip):
+    print("\nFiring " + weapon.name + "...")
+    ai.DodgeAttack(weapon, enemyShip)
 
 def CombatStart(enemyShip):
     Combat(enemyShip)
@@ -37,7 +42,7 @@ def Combat(enemyShip):
 				if selectedWeapon != "null":
 					break
     
-			ships.weapons.Attack(selectedWeapon, enemyShip)
+			Attack(selectedWeapon, enemyShip)
 
 			if enemyShip.hp <= 0 or ships.playerShip.hp <= 0:
 				print("\nYou destroyed the enemy ship!")
