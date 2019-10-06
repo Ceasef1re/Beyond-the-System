@@ -28,7 +28,7 @@ def DodgeAttack(weapon, enemyShip):
 		attackLane = random.randint(1, weapon.hitLanes)
 		choice = random.randint(1, weapon.hitLanes)
 
-		if int(choice) != attackLane:
+		if choice != attackLane:
 			dmg = random.randint(weapon.minDmg, weapon.maxDmg)
 			enemyShip.hp -= dmg
 	
