@@ -1,7 +1,8 @@
-import time
+import threading
 
 def StartCooldowns():
-    return 0 #temporary
+    threading.Timer(1.0, StartCooldowns).start()
+    print("cooldowns are running")
 
 class Weapon:
     def __init__(self, name, minDmg, maxDmg, cooldown, hitLanes):
