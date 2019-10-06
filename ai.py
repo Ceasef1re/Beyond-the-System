@@ -3,19 +3,54 @@ import random
 import math
 
 def Attack(weapon):
-	if weapon.hitLanes > 1:
-		choice = input("Attack incoming!\nChoose a path to avoid it!\n1.\n2,\n3.\n> ")
-		attackLane = random.randint(1, weapon.hitLanes)
+    if weapon.hitLanes > 1:
+        print("Attack incoming\n Choose a path to avoid it\n")
+        for i in range(weapon.hitLanes):
+            print(str(i + 1) + ".")
 
-		if int(choice) == attackLane:
-			dmg = random.randint(weapon.minDmg, weapon.maxDmg)
-		else:
-			dmg = 0;
-	else:
-		dmg = random.randint(weapon.minDmg, weapon.maxDmg)
-	
-	combat.Status(dmg)
-	return dmg
+        while True:
+            choice = input("> ")
+
+            attackLane = random.randint(1, weapon.hitLanes)
+            validOption = False
+
+            if choice != str(attackLane):
+                for i in range(weapon.hitLanes):
+                    if choice == str(i):
+                        dmg = random.randint(weapon.minDmg, weapon.maxDmg)
+                        ships.playerShip.hp -= dmg
+                
+                        print("You delt " + str(dmg) + " damage to the enemy ship")
+                        print(ships.playerShip.name + " is on " + str(ships.playerShip.hp) + " hp!\n")
+                        validOption = True
+                        break
+
+                if not validOption:
+                    print("Invalid option")
+                
+            else:
+                chance = random.randint(1,10)
+                if chance >= 9:
+                    dmg = 0
+                    print("Your attack missed")
+                    print(ships.playerShip.name + " is on " + str(ships.playerShip.hp) + " hp!\n")
+                elif chance >= 7 and chance < 9:
+                    dmg = math.ciel(random.randint(weapon.minDmg, weapon.maxDmg)*0.25)
+                    ships.playerShip.hp -= dmg
+                    print("You dealt " + str(dmg) + " damage")
+                    print(ships.playerShip.name + " is on " + str(ships.playerShip.hp) + " hp!\n")
+                elif chance >= 1 and chance < 7:
+                    dmg = math.ceil(random.randint(weapon.minDmg, weapon.maxDmg)*0.5)
+                    ships.playerShip.hp -= dmg
+                    print("You dealt " + str(dmg) + " damage")
+                    print(ships.playerShip.name + " is on " + str(ships.playerShip.hp) + " hp!\n")
+
+                else:
+                    dmg = random.randint(weapon.minDmg, weapon.maxDmg)
+
+                break
+    
+    combat.Status(dmg)
 	
 def Think():
 	#if attack incoming, run DodgeAttack()
