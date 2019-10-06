@@ -6,7 +6,7 @@ class Ship:
         self.name = name
         self.hp = hp
         self.shields = shields
-        self.wepNumber = weaponNum
+        self.weaponNum = weaponNum
         self.weapons = weapons
         self.armour = armour
 
@@ -27,8 +27,14 @@ def createRandShip():
                     random.randint(1,100),
                     random.randint(1,100),
                     random.randint(1,10),
-                    random.choice(weapons.availableWeapons),
+                    0,
                     random.choice(["light", "medium", "heavy"]))
+        
+        randShip.weapons = [random.choice(weapons.availableWeapons)]
+        
+        for i in range(randShip.weaponNum - 1):            
+            randShip.weapons.append(random.choice(weapons.availableWeapons))
+
         return randShip
 
 playerShip = Ship("", 100, 100,
