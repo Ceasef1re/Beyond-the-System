@@ -1,12 +1,13 @@
 import ships
 import combat
+import player
 
-cooldownStart = 0
-
-player = input("What is your name?\n> ")
-print("Hi " + player + "!")
+name = input("What is your name?\n> ")
+print("Hi " + name + "!")
 ships.playerShip.name = input("What would you like to name your ship?\n> ")
 print(ships.playerShip.name + " it is!")
+
+player = player.Player(name, 0)
 
 print(ships.randShip.name + " is approaching!\n")
 print("What would you like to do?\n1. Attack\n2. Flee\n")
