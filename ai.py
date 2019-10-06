@@ -1,8 +1,10 @@
 import combat
 import random
 import math
+import time
 
 def Attack(weapon):
+    ManageCooldowns(enemyShip, weapon)
     if weapon.hitLanes > 1:
         print("Attack incoming\n Choose a path to avoid it\n")
         for i in range(weapon.hitLanes):
@@ -51,43 +53,51 @@ def Attack(weapon):
                 break
     
     combat.Status(dmg)
-	
+    
 def Think():
-	#if attack incoming, run DodgeAttack()
-	#check cooldowns every second and if weapon off cooldown, fire weapon (Attack(weapon))
-	#maybe some other stuff idk
-	return 0 #temporary
-	
+    #if attack incoming, run DodgeAttack()
+    #check cooldowns every second and if weapon off cooldown, fire weapon (Attack(weapon))
+    #maybe some other stuff idk
+    return 0 #temporary
+    
 def DodgeAttack(weapon, enemyShip):
-	if weapon.hitLanes > 1:
-		attackLane = random.randint(1, weapon.hitLanes)
-		choice = random.randint(1, weapon.hitLanes)
+    if weapon.hitLanes > 1:
+        attackLane = random.randint(1, weapon.hitLanes)
+        choice = random.randint(1, weapon.hitLanes)
 
-		if choice != attackLane:
-			dmg = random.randint(weapon.minDmg, weapon.maxDmg)
-			enemyShip.hp -= dmg
-	
-			print("You delt " + str(dmg) + " damage to the enemy ship")
-			print(enemyShip.name + " is on " + str(enemyShip.hp) + " hp!\n")
-		else:
-			chance = random.randint(1, 10)
-			if chance >= 9:
-				dmg = 0
-				enemyShip.hp -= dmg
-				print("Your attack missed")
-			if chance >= 7 and chance < 9:
-				dmg = math.ceil(random.randint(weapon.minDmg, weapon.maxDmg) * 0.25)
-				print(dmg)
-				enemyShip.hp -= dmg
-				print("You dealt " + str(dmg) + " damage")
-			if chance >= 1 and chance < 7:
-				dmg = math.ceil(random.randint(weapon.minDmg, weapon.maxDmg) * 0.5)
-				enemyShip.hp -= dmg
-				print("You dealt " + str(dmg) + " damage")
-				print(enemyShip.name + " is on " + str(enemyShip.hp) + " hp!\n")
-	else:
-		dmg = random.randint(weapon.minDmg, weapon.maxDmg)
-		enemyShip.hp -= dmg
-	
-		print("You delt " + str(dmg) + " damage to the enemy ship")
-		print(enemyShip.name + " is on " + str(enemyShip.hp) + " hp!\n")
+        if choice != attackLane:
+            dmg = random.randint(weapon.minDmg, weapon.maxDmg)
+            enemyShip.hp -= dmg
+    
+            print("You delt " + str(dmg) + " damage to the enemy ship")
+            print(enemyShip.name + " is on " + str(enemyShip.hp) + " hp!\n")
+        else:
+            chance = random.randint(1, 10)
+            if chance >= 9:
+                dmg = 0
+                enemyShip.hp -= dmg
+                print("Your attack missed")
+            if chance >= 7 and chance < 9:
+                dmg = math.ceil(random.randint(weapon.minDmg, weapon.maxDmg) * 0.25)
+                print(dmg)
+                enemyShip.hp -= dmg
+                print("You dealt " + str(dmg) + " damage")
+            if chance >= 1 and chance < 7:
+                dmg = math.ceil(random.randint(weapon.minDmg, weapon.maxDmg) * 0.5)
+                enemyShip.hp -= dmg
+                print("You dealt " + str(dmg) + " damage")
+                print(enemyShip.name + " is on " + str(enemyShip.hp) + " hp!\n")
+    else:
+        dmg = random.randint(weapon.minDmg, weapon.maxDmg)
+        enemyShip.hp -= dmg
+    
+        print("You delt " + str(dmg) + " damage to the enemy ship")
+        print(enemyShip.name + " is on " + str(enemyShip.hp) + " hp!\n")
+
+def ManageCooldowns(enemyShip, selectedWeapon):
+    if selectedWeapon.onCooldown:
+        if time.time() - selectedWeapon.cooldownStart >= selectedWeapon.cooldown:
+            selectedWeapon.onCooldown = False
+    elif not selectedWeapon.onCooldown:
+        selectedWeapon.cooldownStart = time.time()
+        selectedWeapon.onCooldown = True

@@ -1,21 +1,23 @@
 import ships
 import weapons
 import ai
-import _thread
+import time
 
 enemy = "placeholder"
 
 def Attack(weapon, enemyShip):
-    print("\nFiring " + weapon.name + "...")
-    ai.DodgeAttack(weapon, enemyShip)
+    if weapon.onCooldown:
+        print("\nWeapon is on cooldown!")
+    else:
+        print("\nFiring " + weapon.name + "...")
+        ai.DodgeAttack(weapon, enemyShip)
+
+    ManageCooldowns(weapon)
 
 def CombatStart(enemyShip):
-    _thread.start_new_thread(Combat(enemyShip), ("CombatThread", 2, ))
+    Combat(enemyShip)
 
 def Combat(enemyShip):
-    #Start up all necessary functions for combat
-    weapons.StartCooldowns()
-
     while True:
         choice = input("Select an option:\n1. Fire\n> ")
         if choice == "1":
@@ -66,4 +68,12 @@ def Status(dmg):
             time.sleep(2)
     else:
         print("Captain, we avoided an attack!")
+
+def ManageCooldowns(selectedWeapon):
+    if selectedWeapon.onCooldown:
+        if time.time() - selectedWeapon.cooldownStart >= selectedWeapon.cooldown:
+            selectedWeapon.onCooldown = False
+    elif not selectedWeapon.onCooldown:
+        selectedWeapon.cooldownStart = time.time()
+        selectedWeapon.onCooldown = True
 
