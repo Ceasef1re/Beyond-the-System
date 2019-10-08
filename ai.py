@@ -2,9 +2,11 @@ import combat
 import random
 import math
 import time
+import weapons
 
 def Attack(weapon):
     ManageCooldowns(enemyShip, weapon)
+    checkPierce(weapon, enemyShip)
     if weapon.hitLanes > 1:
         print("Attack incoming\n Choose a path to avoid it\n")
         for i in range(weapon.hitLanes):
@@ -67,7 +69,10 @@ def DodgeAttack(weapon, enemyShip):
 
         if choice != attackLane:
             dmg = random.randint(weapon.minDmg, weapon.maxDmg)
-            enemyShip.hp -= dmg
+            if enemyShip.shields > 0:
+                enemyShip.shields -= dmg
+            else:
+                enemyShip.hp -= dmg
     
             print("You delt " + str(dmg) + " damage to the enemy ship")
             print(enemyShip.name + " is on " + str(enemyShip.hp) + " hp!\n")
@@ -75,16 +80,21 @@ def DodgeAttack(weapon, enemyShip):
             chance = random.randint(1, 10)
             if chance >= 9:
                 dmg = 0
-                enemyShip.hp -= dmg
                 print("Your attack missed")
             if chance >= 7 and chance < 9:
                 dmg = math.ceil(random.randint(weapon.minDmg, weapon.maxDmg) * 0.25)
                 print(dmg)
-                enemyShip.hp -= dmg
+                if enemyShip.shields > 0:
+                    enemyShip.shields -= dmg
+                else:
+                    enemyShip.hp -= dmg
                 print("You dealt " + str(dmg) + " damage")
             if chance >= 1 and chance < 7:
                 dmg = math.ceil(random.randint(weapon.minDmg, weapon.maxDmg) * 0.5)
-                enemyShip.hp -= dmg
+                if enemyShip.shields > 0:
+                    enemyShip.shields -= dmg
+                else:
+                    enemyShip.hp -= dmg
                 print("You dealt " + str(dmg) + " damage")
                 print(enemyShip.name + " is on " + str(enemyShip.hp) + " hp!\n")
     else:
@@ -101,3 +111,5 @@ def ManageCooldowns(enemyShip, selectedWeapon):
     elif not selectedWeapon.onCooldown:
         selectedWeapon.cooldownStart = time.time()
         selectedWeapon.onCooldown = True
+    else:
+        print("error")

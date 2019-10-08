@@ -5,13 +5,25 @@ import time
 
 enemy = "placeholder"
 
-def Attack(weapon, enemyShip):
+def Attack(weapon, ship):
     if weapon.onCooldown:
         print("\nWeapon is on cooldown!")
     else:
         print("\nFiring " + weapon.name + "...")
-        ai.DodgeAttack(weapon, enemyShip)
-
+        ai.DodgeAttack(weapon, ship)
+    ManageCooldowns(weapon)
+        
+def checkPierce(weapon, ship):
+    if weapon.onCooldown:
+        print("\nWeapon is on cooldown!")
+    else:
+        if ship.shields > 0:
+            return True
+        else:
+            if weapon.pierceTypes >= ship.armourIndex:
+                return True
+            else:
+                print("you didnt pierce their armour")
     ManageCooldowns(weapon)
 
 def CombatStart(enemyShip):
@@ -44,8 +56,11 @@ def Combat(enemyShip):
                     loop += 1
                 if selectedWeapon != "null":
                     break
-    
-            Attack(selectedWeapon, enemyShip)
+
+            if checkPierce(selectedWeapon, enemyShip):
+                Attack(selectedWeapon, enemyShip)
+            else:
+                continue
 
             if enemyShip.hp <= 0 or ships.playerShip.hp <= 0:
                 print("\nYou destroyed the enemy ship!")

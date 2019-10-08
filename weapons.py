@@ -13,10 +13,11 @@ class Weapon:
         self.hitLanes = hitLanes
         self.pierceTypes = pierceTypes
 
-availableWeapons = [Weapon("lasers", 1, 10, 10, False, 0, 2, ("light")),
-                    Weapon("missile", 1, 15, 5, False, 0, 3, ("medium"))]
+pierceTypes = ["weak", "light", "medium", "heavy", "special1", "special2", "special3"]
+        
+
+availableWeapons = [Weapon("lasers", 1, 10, 10, False, 0, 2, pierceTypes.index("weak")),
+                    Weapon("missile", 1, 15, 5, False, 0, 3, pierceTypes.index("medium"))]
 
 lasers = availableWeapons[0]
-missile = availableWeapons[1]
-
-print(missile.pierceTypes)                    
+missile = availableWeapons[1]                  
